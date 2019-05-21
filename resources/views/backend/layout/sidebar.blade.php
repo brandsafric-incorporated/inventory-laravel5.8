@@ -9,15 +9,26 @@
           <span>Dashboard</span>
         </a>
       </li>
-      <li class="sub-menu {!! request()->is('items*')?'active':'' !!}">
+      <li class="sub-menu {!! request()->is('admin/items*')?'active':'' !!}">
         <a href="javascript:;" class="">
           <i class="icon_document_alt"></i>
           <span>Items</span>
           <span class="menu-arrow arrow_carrot-right"></span>
         </a>
         <ul class="sub">
-          <li><a class="" href="{{ route('items.create') }}">Add</a></li>
-          <li><a class="" href="{{ route('items.index') }}">Manage</a></li>
+          <li><a class="" href="{{ route('admin.items.create') }}">Add</a></li>
+          <li><a class="" href="{{ route('admin.items.index') }}">Manage</a></li>
+        </ul>
+      </li>
+      <li class="sub-menu {!! request()->is('admin/departments*')?'active':'' !!}">
+        <a href="javascript:;" class="">
+          <i class="icon_document_alt"></i>
+          <span>Departments</span>
+          <span class="menu-arrow arrow_carrot-right"></span>
+        </a>
+        <ul class="sub">
+          <li><a class="" href="{{ route('admin.departments.create') }}">Add</a></li>
+          <li><a class="" href="{{ route('admin.departments.index') }}">Manage</a></li>
         </ul>
       </li>
     </ul>

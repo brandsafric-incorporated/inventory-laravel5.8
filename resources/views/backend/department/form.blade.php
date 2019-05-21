@@ -1,21 +1,21 @@
 {{-- If id is not set it is store else update --}}
 @if(isset($data->id))
-<form role="form" method="post" action="{{ route('admin.items.update',$data->id) }}">
+<form role="form" method="post" action="{{ route('admin.departments.update',$data->id) }}">
     @method('PUT')
 @else
-<form role="form" method="post" action="{{ route('admin.items.store') }}">
+<form role="form" method="post" action="{{ route('admin.departments.store') }}">
 @endif  
     @csrf
     <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" name='title' id="title" placeholder="Enter title of item" value="{{ isset($data->title)?$data->title:(old('title')?old('title'):'') }}">
-        @if($errors->has('title'))
-            <div class="alert alert-danger">{{ $errors->first('title')}}</div>
+        <label for="name">Department Name</label>
+        <input type="text" class="form-control" name='name' id="name" placeholder="Enter department name" value="{{ isset($data->name)?$data->name:(old('name')?old('name'):'') }}">
+        @if($errors->has('name'))
+            <div class="alert alert-danger">{{ $errors->first('name')}}</div>
         @endif
     </div>
     <div class="form-group">
-        <label for="code">Item Code</label>
-        <input type="text" class="form-control" name='code' id="code" placeholder="Enter unique item code" value="{{ isset($data->code)?$data->code:(old('code')?old('code'):'') }}">
+        <label for="code">Department Code</label>
+        <input type="text" class="form-control" name='code' id="code" placeholder="Enter unique department code" value="{{ isset($data->code)?$data->code:(old('code')?old('code'):'') }}">
         @if($errors->has('code'))
             <div class="alert alert-danger">{{ $errors->first('code')}}</div>
         @endif

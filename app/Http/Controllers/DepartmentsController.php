@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
-class ItemsController extends Controller
+class DepartmentsController extends Controller
 {
     protected $model;
-    public function __construct(Item $item)
+
+    public function __construct(Department $department)
     {
-        $this->model=$item;
+        $this->model=$department;
     }
     /**
      * Display a listing of the resource.
@@ -20,7 +21,7 @@ class ItemsController extends Controller
     public function index()
     {
         $data=$this->model->OrderBy('id','desc')->get();
-        return view('backend.item.index',compact('data'));
+        return view('backend.department.index',compact('data'));
     }
 
     /**
@@ -30,7 +31,7 @@ class ItemsController extends Controller
      */
     public function create()
     {
-        return view('backend.item.create');
+        return view('backend.department.create');
     }
 
     /**
@@ -42,21 +43,21 @@ class ItemsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'title'=>'required',
-            'code'=>'required|unique:items,code',
-            'status'=>'required'
+            'name'=>'required',
+            'code'=>'required|unique:departments,code',
+            'status'=>'required|numeric'
             ]);
         $this->model->create($request->all());
-        return redirect()->back()->withSuccess("New Item successfully added");
+        return redirect()->back()->withSuccess("Department successfully added");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function show(Item $item)
+    public function show(Department $department)
     {
         //
     }
@@ -64,44 +65,44 @@ class ItemsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Item  $item
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $data=$this->model->find($id);
-        return view('backend.item.create',compact('data'));
+        return view('backend.department.create',compact('data'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Item  $item
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $data=$this->validate($request,[
-            'title'=>'required',
-            'code'=>'required|unique:items,code,'.$id,
-            'status'=>'required'
+            'name'=>'required',
+            'code'=>'required|unique:departments,code,'.$id,
+            'status'=>'required|numeric'
             ]);
-        $item=$this->model->find($id);
-        $item->update($data);
-        return redirect()->route('admin.items.index')->withSuccess("Item successfully Updated");
+        $department=$this->model->find($id);
+        $department->update($data);
+        return redirect()->route('admin.departments.index')->withSuccess("Department successfully updated");
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Item  $item
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $item=$this->model->find($id);
-        $item->delete();
-        return redirect()->back()->withSuccess('Item Deleted Successfully');
+        $data=$this->model->find($id);
+        $data->delete();
+        return redirect()->back()->withSuccess('Department Successfully Deleted!!!');
     }
 }
