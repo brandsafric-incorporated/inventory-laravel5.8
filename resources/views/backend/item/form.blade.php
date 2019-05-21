@@ -32,5 +32,7 @@
         @endif
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
-    <button type="reset" class="btn btn-danger">Reset</button>            
+    @if(!isset($data))
+    <button type="reset" class="btn btn-danger">Reset</button>    
+    @endif           
 </form>

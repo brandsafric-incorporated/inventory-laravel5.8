@@ -1,13 +1,25 @@
 {{-- If id is not set it is store else update --}}
 @if(isset($data->id))
-<form role="form" method="post" action="{{ route('admin.departments.update',$data->id) }}">
+<form role="form" method="post" action="{{ route('admin.sub-departments.update',$data->id) }}">
     @method('PUT')
 @else
-<form role="form" method="post" action="{{ route('admin.departments.store') }}">
+<form role="form" method="post" action="{{ route('admin.sub-departments.store') }}">
 @endif  
     @csrf
     <div class="form-group">
-        <label for="name">Department Name</label>
+        <label for="department_id">Department Name</label>
+        <select name="department_id" id="department_id" class="form-control">
+            <option value="">---Select Department---</option>
+            @foreach ($departments as $item)
+        <option value="{{ $item->id }}" @if(isset($data) && $item->id==$data->department_id) selected @endif>{{ ucwords($item->name) }}</option>
+            @endforeach
+        </select>
+        @if($errors->has('department_id'))
+            <div class="alert alert-danger">{{ $errors->first('department_id')}}</div>
+        @endif
+    </div>
+    <div class="form-group">
+        <label for="name">Sub Department Name</label>
         <input type="text" class="form-control" name='name' id="name" placeholder="Enter department name" value="{{ isset($data->name)?$data->name:(old('name')?old('name'):'') }}">
         @if($errors->has('name'))
             <div class="alert alert-danger">{{ $errors->first('name')}}</div>
