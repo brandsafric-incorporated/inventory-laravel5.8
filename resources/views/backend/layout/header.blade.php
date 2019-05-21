@@ -46,32 +46,32 @@
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
-          <!-- user login dropdown start-->
-          <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">
-              <span class="username"></span>
-              <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu extended logout">
-              <div class="log-arrow-up"></div>
-              <li class="nav-item dropdown">
-                <a class="dropdown-item" href="{{ route('logout') }}"
-                  onclick="event.preventDefault();
-                  document.getElementById('logout-form').submit();">
-                  {{ __('Logout') }}
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                  @csrf
-                </form>
-              </li>
-              <li class="nav-item dropdown">
-                <a href="" class="dropdown-item">
-                  Password
-                </a>
-              </li>
-            </ul>
-          </li>
-          <!-- user login dropdown end -->
+           <!-- user login dropdown start-->
+           <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">
+                <span class="username">{{ Auth::user()->name }}</span>
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu extended logout">
+                <div class="log-arrow-up"></div>
+                <li class="nav-item dropdown">
+                  <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                  </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                  </form>
+                </li>
+                <li class="nav-item dropdown">
+                  <a href="" class="dropdown-item">
+                      {{ __('Password') }}
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!-- user login dropdown end -->
         </ul>
         <!-- notificatoin dropdown end-->
       </div>
