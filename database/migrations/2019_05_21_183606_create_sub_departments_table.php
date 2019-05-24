@@ -20,7 +20,7 @@ class CreateSubDepartmentsTable extends Migration
                             ->references('id')->on('departments');
             $table->string('name');
             $table->string('code')->unique();
-            $table->tinyInteger('status');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

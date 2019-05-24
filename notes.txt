@@ -1,0 +1,20 @@
+Roles
+-------------------------
+Reporting
+---------
+Reporting users have read-only access to all of your items, transactions and reports. 
+They don't enter data and can't change company settings. 
+This role is useful for accounting and marketing users.
+They aren't part of the day-to-day operations but need to analyze the data to inform decisions. 
+This is for the person who doesn't necessarily perform inventory management tasks but does need to keep track of what's going on. 
+
+Basic User
+----------
+You can authorize a basic user to add and remove stock.
+This is the role you would choose for a typical employee who just needs to perform inventory management functions.
+
+Manager
+-------
+Managers can act across all locations and can create basic users as well. 
+They can also see reports and update company wide settings.
+Reporting, new users, terminations, etc).

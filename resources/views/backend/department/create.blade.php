@@ -17,7 +17,7 @@
     <div class="col-lg-6">
       <section class="panel">
         @include('backend.layout.flash')
-        <header class="panel-heading">Add Department</header>
+        <header class="panel-heading">{{ (isset($data))?'Edit':'Add' }} Department</header>
         <div class="panel-body">
           @include('backend.department.form')
         </div>

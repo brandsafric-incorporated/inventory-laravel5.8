@@ -23,6 +23,11 @@ Route::group(['middleware'=>'auth','prefix' =>'admin','as'=>'admin.'], function 
     Route::resources([
         'items'=>'ItemsController',
         'departments'=>'DepartmentsController',
-        'sub-departments'=>'SubDepartmentsController'
+        'sub-departments'=>'SubDepartmentsController',
+        'roles'=>'RolesController',
+        'permissions'=>'PermissionsController',
+        'roles-permissions'=>'RolesPermissionsController',
+        'users'=>'UsersController',
+        'users-roles'=>'UsersRolesController',
         ]);
 });

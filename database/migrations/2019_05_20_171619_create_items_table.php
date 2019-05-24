@@ -17,7 +17,7 @@ class CreateItemsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('code')->unique();
-            $table->tinyInteger('status');
+            $table->boolean('status');
             $table->timestamps();
         });
     }
