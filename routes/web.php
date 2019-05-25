@@ -19,7 +19,20 @@ Auth::routes();
 
 Route::middleware('auth')->get('/home', 'HomeController@index')->name('home');
 
-Route::group(['middleware'=>'auth','prefix' =>'admin','as'=>'admin.'], function () {
+Route::group(['middleware'=>['auth','admin'],'prefix' =>'admin','as'=>'admin.'], function () {
+    Route::resources([
+        'items'=>'ItemsController',
+        'departments'=>'DepartmentsController',
+        'sub-departments'=>'SubDepartmentsController',
+        'roles'=>'RolesController',
+        'permissions'=>'PermissionsController',
+        'roles-permissions'=>'RolesPermissionsController',
+        'users'=>'UsersController',
+        'users-roles'=>'UsersRolesController',
+        ]);
+});
+
+Route::group(['middleware'=>'auth','prefix' =>'user','as'=>'user.'], function () {
     Route::resources([
         'items'=>'ItemsController',
         'departments'=>'DepartmentsController',

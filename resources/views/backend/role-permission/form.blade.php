@@ -11,7 +11,7 @@
         <select name="role" id="role" class="form-control">
             <option value="">---Select Role---</option>
             @foreach ($roles as $role)
-                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                <option value="{{ $role->id }}" @if(isset($data->id) && $data->id==$role->id) selected @endif>{{ $role->name }}</option>
             @endforeach
         </select>
         @if($errors->has('role'))
@@ -19,13 +19,15 @@
         @endif
     </div>
     <div class="form-group">
-        <label for="permission">Permission</label>
-        <select name="permission" id="permission" class="form-control">
-            <option value="">---Select Permission---</option>
-            @foreach ($permissions as $permission)
-                <option value="{{ $permission->id }}">{{ $permission->name }}</option>
-            @endforeach
-        </select>
+        <label for="permission">Permissions</label>
+        @foreach ($permissions as $permission)
+            <div class="checkbox">
+                <label>
+                    <input name="permission[]" id="permission" type="checkbox" value="{{ $permission->id }}" @if(isset($data->id) && in_array($permission->id,$rolePermission)) checked @endif>
+                    {{ $permission->name }}
+                </label>
+            </div>
+        @endforeach
         @if($errors->has('permission'))
             <div class="alert alert-danger">{{ $errors->first('permission')}}</div>
         @endif

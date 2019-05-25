@@ -15,7 +15,8 @@ class RolesPermissionsController extends Controller
      */
     public function index()
     {
-        //
+        $data=Role::get();
+        return view('backend.role-permission.index',compact('data'));
     }
 
     /**
@@ -42,12 +43,18 @@ class RolesPermissionsController extends Controller
             'role'=>'required',
             'permission'=>'required'
         ]);
-        $role_id=$request->role;
-        $permission_id=$request->permission;
-        $role=Role::findById($role_id);
-        $permission=Permission::findById($permission_id);
-        $role->givePermissionTo($permission);
-        return redirect()->back()->withSuccess('Permission for Role Successfully Added');
+        /** Finding Role by role_id */
+        $role=Role::findById($request->role);
+        /** Multiple permissions synced to a role */
+        $role->syncPermissions($request->permission);
+
+        // foreach($request->permission as $permission){
+        //     /** Finding Permission By permission_id */
+        //     $permission=Permission::findById($permission);
+        //     /** Assigning Permission to role */
+        //     $role->givePermissionTo($permission);
+        // }
+        return redirect()->back()->withSuccess('Permission asssigned to Role Successfully!!!');
     }
 
     /**
@@ -69,7 +76,22 @@ class RolesPermissionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data=Role::findById($id);
+        /** Extract all the permissions of role */
+        $permission=$data->getAllPermissions();
+        /** Converting permission collection to array 
+         * so that we can check the checkbox by using 
+         * in_array() function.
+        */
+        $rolePermission=array();
+        foreach($permission as $per){
+            $rolePermission[]=$per->id;
+        }  
+        /** Get all roles */
+        $roles=Role::get();
+        /** Get all permissions */
+        $permissions=Permission::get();
+        return view('backend.role-permission.create',compact('data','rolePermission','roles','permissions'));
     }
 
     /**
@@ -81,7 +103,15 @@ class RolesPermissionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'role'=>'required',
+            'permission'=>'required'
+        ]);
+        /** Finding Role by role_id */
+        $role=Role::findById($request->role);
+        /** Multiple permissions synced to a role */
+        $role->syncPermissions($request->permission);
+        return redirect()->route('admin.roles-permissions.index')->withSuccess('Role and Permission Updated Successfully!!!');
     }
 
     /**

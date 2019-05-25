@@ -4,6 +4,7 @@
         <th><i class="icon_profile"></i> S.N.</th>
         <th><i class="icon_calendar"></i> User Name</th>
         <th><i class="icon_calendar"></i> Email</th>
+        <th><i class="icon_calendar"></i> Role</th>
         <th><i class="icon_cogs"></i> Action</th>
       </tr>
       @if($data->count())
@@ -12,6 +13,18 @@
         <td>{{ $key+1 }}</td>
         <td>{{ $item->name }}</td>
         <td>{{ $item->email }}</td>
+        <td>
+          @php
+            $user=App\User::find($item->id);
+            $roles=$user->getRoleNames();
+            foreach ($roles as $key => $value) {
+              echo $value;
+              if($roles->count()>1){
+                  echo ' | ';
+              }
+            }
+          @endphp
+        </td>
         <td>
           <div class="btn-group">
             <form action="{{ route('admin.users.destroy',$item->id) }}" method="post">

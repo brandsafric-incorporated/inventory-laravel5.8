@@ -17,6 +17,8 @@ class CreateItemsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('code')->unique();
+            $table->integer('alert')->comment('Alert Indicator');
+            $table->integer('warning')->comment('Warning Indicator');
             $table->boolean('status');
             $table->timestamps();
         });

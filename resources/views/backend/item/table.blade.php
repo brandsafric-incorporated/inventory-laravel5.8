@@ -19,7 +19,9 @@
             <form action="{{ route('admin.items.destroy',$item->id) }}" method="post">
                 @method('DELETE')
                 @csrf
-                <a class="btn btn-success" href="{{ route('admin.items.edit',$item->id) }}" onclick="return confirm('Editing Record!!!\nAre you sure?')"><i class="fa fa-edit"></i></a>
+                @can('Edit Items')
+                  <a class="btn btn-success" href="{{ route('admin.items.edit',$item->id) }}" onclick="return confirm('Editing Record!!!\nAre you sure?')"><i class="fa fa-edit"></i></a>
+                @endcan
                 <button type="submit" class="btn btn-danger" onclick="return confirm('Deleteing Record!!!\nAre you sure?')"><i class="icon_close_alt2"></i></button>
             </form>
           </div>

@@ -5,10 +5,10 @@
       <section class="wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h3 class="page-header"><i class="fa fa fa-bars"></i>Items</h3>
+            <h3 class="page-header"><i class="fa fa fa-bars"></i>Roles & Permissions</h3>
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="">Dashboard</a></li>
-              <li><i class="fa fa-bars"></i><a href="{{ route('admin.roles-permissions.create') }}">Add Roles</a></li>
+              <li><i class="fa fa-bars"></i><a href="{{ route('admin.roles-permissions.create') }}">Add Role & Permission</a></li>
             </ol>
           </div>
         </div>

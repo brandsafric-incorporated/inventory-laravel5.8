@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use Spatie\Permission\Models\Role;
 
 class UsersRolesController extends Controller
 {
@@ -13,7 +15,8 @@ class UsersRolesController extends Controller
      */
     public function index()
     {
-        //
+        $data=User::where('is_admin',0)->get();
+        return view('backend.user-role.index',compact('data'));
     }
 
     /**
@@ -23,7 +26,9 @@ class UsersRolesController extends Controller
      */
     public function create()
     {
-        //
+        $users=User::get();
+        $roles=Role::get();
+        return view('backend.user-role.create',compact('users','roles'));
     }
 
     /**
@@ -34,7 +39,11 @@ class UsersRolesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user_id=$request->user_id;
+        $role_id=$request->role;
+        $user=User::find($user_id);
+        $user->assignRole($role_id);
+        return redirect()->back()->withSuccess('User Role Successfully Added');
     }
 
     /**
@@ -56,7 +65,11 @@ class UsersRolesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data=User::find($id);
+        $userRole=$data->getRoleNames()->toArray();
+        $users=User::get();
+        $roles=Role::get();
+        return view('backend.user-role.create',compact('data','userRole','users','roles'));
     }
 
     /**
@@ -68,7 +81,10 @@ class UsersRolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $role_id=$request->role;
+        $user=User::find($id);
+        $user->syncRoles($role_id);
+        return redirect()->route('admin.users-roles.index')->withSuccess('User Role Successfully Updated !!!');
     }
 
     /**

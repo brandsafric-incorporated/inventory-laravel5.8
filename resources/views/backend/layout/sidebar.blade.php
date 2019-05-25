@@ -3,6 +3,7 @@
     <div id="sidebar" class="nav-collapse ">
     <!-- sidebar menu start-->
     <ul class="sidebar-menu">
+      @if(Auth::user()->is_admin==1)
       <li class="active">
         <a href="">
           <i class="icon_house_alt"></i>
@@ -98,6 +99,25 @@
         </ul>
       </li>
     </ul>
+    @else
+    <li class="active">
+        <a href="">
+          <i class="icon_house_alt"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="sub-menu {!! request()->is('admin/items*')?'active':'' !!}">
+        <a href="javascript:;">
+          <i class="icon_document_alt"></i>
+          <span>Items</span>
+          <span class="menu-arrow arrow_carrot-right"></span>
+        </a>
+        <ul class="sub">
+          <li><a href="{{ route('user.items.create') }}">Add</a></li>
+          <li><a href="{{ route('user.items.index') }}">Manage</a></li>
+        </ul>
+      </li>
+    @endif
     <!-- sidebar menu end-->
   </div>
 </aside>

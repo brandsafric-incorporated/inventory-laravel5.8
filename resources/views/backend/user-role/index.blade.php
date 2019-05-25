@@ -5,10 +5,10 @@
       <section class="wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h3 class="page-header"><i class="fa fa fa-bars"></i>Items</h3>
+            <h3 class="page-header"><i class="fa fa fa-bars"></i>Users & Roles</h3>
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="">Dashboard</a></li>
-              <li><i class="fa fa-bars"></i><a href="{{ route('admin.roles-permissions.create') }}">Add Roles</a></li>
+              <li><i class="fa fa-bars"></i><a href="{{ route('admin.users-roles.create') }}">Add User & Role</a></li>
             </ol>
           </div>
         </div>
@@ -17,9 +17,9 @@
           <section class="panel">
               @include('backend.layout.flash')
             <header class="panel-heading">
-              All Roles & Permissions
+              All Users & Roles
             </header>
-            @include('backend.role-permission.table')            
+            @include('backend.user-role.table')            
           </section>
         </div>
         <!-- page end-->

@@ -1,33 +1,35 @@
 {{-- If id is not set it is store else update --}}
 @if(isset($data->id))
-<form role="form" method="post" action="{{ route('admin.roles-permissions.update',$data->id) }}">
+<form role="form" method="post" action="{{ route('admin.users-roles.update',$data->id) }}">
     @method('PUT')
 @else
-<form role="form" method="post" action="{{ route('admin.roles-permissions.store') }}">
+<form role="form" method="post" action="{{ route('admin.users-roles.store') }}">
 @endif  
     @csrf
     <div class="form-group">
-        <label for="role">Role</label>
-        <select name="role" id="role" class="form-control">
-            <option value="">---Select Role---</option>
-            @foreach ($roles as $role)
-                <option value="{{ $role->id }}">{{ $role->name }}</option>
+        <label for="user_id">User</label>
+        <select name="user_id" id="user_id" class="form-control">
+            <option value="">---Select User---</option>
+            @foreach ($users as $user)
+                <option value="{{ $user->id }}" {{(isset($data->id) && ($user->id==$data->id))?'selected':'' }}>{{ $user->name }} ({{ $user->email}})</option>
             @endforeach
         </select>
-        @if($errors->has('role'))
-            <div class="alert alert-danger">{{ $errors->first('role')}}</div>
+        @if($errors->has('user_id'))
+            <div class="alert alert-danger">{{ $errors->first('user_id')}}</div>
         @endif
     </div>
     <div class="form-group">
-        <label for="permission">Permission</label>
-        <select name="permission" id="permission" class="form-control">
-            <option value="">---Select Permission---</option>
-            @foreach ($permissions as $permission)
-                <option value="{{ $permission->id }}">{{ $permission->name }}</option>
-            @endforeach
-        </select>
-        @if($errors->has('permission'))
-            <div class="alert alert-danger">{{ $errors->first('permission')}}</div>
+        <label for="permission">Roles</label>
+        @foreach ($roles as $role)
+            <div class="checkbox">
+                <label>
+                    <input name="role[]" id="role" type="checkbox" value="{{ $role->id }}" @if(isset($data->id) && in_array($role->name,$userRole)) checked @endif>
+                    {{ $role->name }}
+                </label>
+            </div>
+        @endforeach
+        @if($errors->has('role'))
+            <div class="alert alert-danger">{{ $errors->first('role')}}</div>
         @endif
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>

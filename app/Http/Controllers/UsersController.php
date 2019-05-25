@@ -21,7 +21,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $data=$this->model->get();
+        $data=$this->model->where('is_admin',0)->get(['id','name','email']);
         return view('backend.user.index',compact('data'));
     }
 

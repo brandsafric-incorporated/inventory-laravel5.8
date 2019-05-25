@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Admin',
             'email' =>'admin@inventory.com',
             'password' => bcrypt('inventory'),
+            'is_admin'=>1,
         ]);
     }
 }

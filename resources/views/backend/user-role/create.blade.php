@@ -19,7 +19,7 @@
         @include('backend.layout.flash')
         <header class="panel-heading">{{ (isset($data))?'Edit':'Add' }} Role & Permission</header>
         <div class="panel-body">
-          @include('backend.role-permission.form')
+          @include('backend.user-role.form')
         </div>
       </section>
     </div>
